@@ -63,7 +63,7 @@ const CompletionStep = ({ coreValues, userInfo }: CompletionStepProps) => {
   };
 
   const handleRedirect = () => {
-    window.location.href = REDIRECT_URL;
+    // window.location.href = REDIRECT_URL; TODO: REMOVE THIS
   };
 
   useEffect(() => {
