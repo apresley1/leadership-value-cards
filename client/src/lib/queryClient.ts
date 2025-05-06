@@ -1,7 +1,7 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
 
 // Get API server URL from environment or use default
-const API_SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:3001";
+const API_SERVER_URL = import.meta.env.VITE_SERVER_URL || "https://5000-apresley1-leadershipval-mqleaza56ux.ws-eu118.gitpod.io"; // TODO: REMOVE THIS
 
 // Helper function to build absolute API URLs
 export function getApiUrl(path: string): string {

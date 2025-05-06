@@ -9,7 +9,7 @@ export const sendPdfEmail = async (
   coreValues: LeadershipValue[]
 ): Promise<{ success: boolean; error?: any }> => {
   try {
-    const apiUrl = `${import.meta.env.VITE_SERVER_URL || 'http://localhost:3001'}/api/send-pdf-email`;
+    const apiUrl = `${import.meta.env.VITE_SERVER_URL}/api/send-pdf-email`;
     
     const response = await fetch(apiUrl, {
       method: 'POST',

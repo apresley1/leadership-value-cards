@@ -7,6 +7,7 @@ import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 export default defineConfig({
   server: {
     port: 3000,
+    allowedHosts: ["3000-apresley1-leadershipval-mqleaza56ux.ws-eu118.gitpod.io"] // TODO: REMOVE THIS
   },
   plugins: [
     react(),
