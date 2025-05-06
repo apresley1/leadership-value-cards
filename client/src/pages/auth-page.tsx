@@ -1,7 +1,6 @@
 import { useAuth } from "@/hooks/use-auth";
 import { useToast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, Redirect, useLocation } from "wouter";
 import * as z from "zod";
@@ -32,9 +31,8 @@ const loginSchema = z.object({
 });
 
 const AuthPage = () => {
-  const [isLogin, setIsLogin] = useState(true);
   const { toast } = useToast();
-  const { user, loginMutation, registerMutation } = useAuth();
+  const { user, loginMutation } = useAuth();
   const [location] = useLocation();
 
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -46,11 +44,7 @@ const AuthPage = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof loginSchema>) => {
-    if (isLogin) {
-      loginMutation.mutate(values);
-    } else {
-      registerMutation.mutate(values);
-    }
+    loginMutation.mutate(values);
   };
 
   // If user is already logged in, redirect to admin page
@@ -67,18 +61,17 @@ const AuthPage = () => {
             <div className="mb-4 flex justify-center">
               <Logo />
             </div>
-            <CardTitle className="text-2xl font-bold">
-              {isLogin ? "Admin Login" : "Create Admin Account"}
-            </CardTitle>
+            <CardTitle className="text-2xl font-bold">Admin Login</CardTitle>
             <CardDescription>
-              {isLogin
-                ? "Enter your credentials to access the admin portal"
-                : "Create an account to manage leadership values"}
+              Enter your credentials to access the admin portal
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-6"
+              >
                 <FormField
                   control={form.control}
                   name="username"
@@ -99,7 +92,11 @@ const AuthPage = () => {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input type="password" placeholder="••••••••" {...field} />
+                        <Input
+                          type="password"
+                          placeholder="••••••••"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -108,29 +105,14 @@ const AuthPage = () => {
                 <Button
                   type="submit"
                   className="w-full"
-                  disabled={loginMutation.isPending || registerMutation.isPending}
+                  disabled={loginMutation.isPending}
                 >
-                  {isLogin
-                    ? loginMutation.isPending
-                      ? "Logging in..."
-                      : "Log in"
-                    : registerMutation.isPending
-                    ? "Creating account..."
-                    : "Create account"}
+                  {loginMutation.isPending ? "Logging in..." : "Log in"}
                 </Button>
               </form>
             </Form>
           </CardContent>
           <CardFooter className="flex justify-center flex-col gap-2">
-            <Button
-              variant="link"
-              onClick={() => setIsLogin(!isLogin)}
-              className="text-sm"
-            >
-              {isLogin
-                ? "Don't have an account? Sign up"
-                : "Already have an account? Log in"}
-            </Button>
             <Link href="/">
               <Button variant="link" size="sm">
                 Back to App
@@ -143,12 +125,11 @@ const AuthPage = () => {
       {/* Hero Side */}
       <div className="hidden md:flex md:w-1/2 bg-primary/10 p-12 flex-col justify-center">
         <div className="max-w-md mx-auto">
-          <h1 className="text-4xl font-bold text-primary mb-6">
-            Admin Portal
-          </h1>
+          <h1 className="text-4xl font-bold text-primary mb-6">Admin Portal</h1>
           <p className="text-lg mb-8 text-muted-foreground">
-            Welcome to the admin portal for the Leadership Value Cards Sorting Application.
-            This portal allows you to manage the leadership value cards, view user submissions, and customize the experience.
+            Welcome to the admin portal for the Leadership Value Cards Sorting
+            Application. This portal allows you to manage the leadership value
+            cards, view user submissions, and customize the experience.
           </p>
           <div className="space-y-4">
             <div className="flex items-start">
@@ -160,7 +141,8 @@ const AuthPage = () => {
               <div>
                 <h3 className="font-medium">Manage Value Cards</h3>
                 <p className="text-muted-foreground">
-                  Add, edit, or remove leadership value cards used in the assessment.
+                  Add, edit, or remove leadership value cards used in the
+                  assessment.
                 </p>
               </div>
             </div>
