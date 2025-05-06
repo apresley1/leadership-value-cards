@@ -1,6 +1,4 @@
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ShieldIcon } from "lucide-react";
 import { ReactNode } from "react";
 import { Link, useLocation } from "wouter";
 import { Logo } from "./Logo";
@@ -33,18 +31,6 @@ const AppLayout = ({ children }: AppLayoutProps) => {
                 Discover your core leadership values
               </p>
             </Link>
-          </div>
-          <div className="flex items-center space-x-3">
-              <Link href="/admin">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="flex items-center"
-                >
-                  <ShieldIcon className="h-4 w-4" />
-                  Admin
-                </Button>
-              </Link>
           </div>
         </div>
       </header>
