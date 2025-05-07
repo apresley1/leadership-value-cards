@@ -6,7 +6,7 @@ const API_SERVER_URL = import.meta.env.VITE_SERVER_URL;
 // Helper function to build absolute API URLs
 export function getApiUrl(path: string): string {
   // Ensure path starts with /
-  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
   return `${API_SERVER_URL}${normalizedPath}`;
 }
 
@@ -20,11 +20,11 @@ async function throwIfResNotOk(res: Response) {
 export async function apiRequest(
   method: string,
   url: string,
-  data?: unknown | undefined
+  data?: unknown | undefined,
 ): Promise<Response> {
   // If the URL starts with /api, use the API server URL
-  const fullUrl = url.startsWith("/api") ? getApiUrl(url) : url;
-
+  const fullUrl = url.startsWith('/api') ? getApiUrl(url) : url;
+  
   const res = await fetch(fullUrl, {
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
@@ -44,8 +44,8 @@ export const getQueryFn: <T>(options: {
   async ({ queryKey }) => {
     const urlPath = queryKey[0] as string;
     // If the URL starts with /api, use the API server URL
-    const fullUrl = urlPath.startsWith("/api") ? getApiUrl(urlPath) : urlPath;
-
+    const fullUrl = urlPath.startsWith('/api') ? getApiUrl(urlPath) : urlPath;
+    
     const res = await fetch(fullUrl, {
       credentials: "include",
     });
