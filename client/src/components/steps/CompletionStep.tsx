@@ -12,7 +12,7 @@ interface CompletionStepProps {
 }
 
 // Redirect URL - This could be set from an environment variable or admin settings
-const REDIRECT_URL = "https://example.com/leadership-consulting";
+const REDIRECT_URL = import.meta.env.REDIRECT_URL || "https://example.com/leadership-consulting";
 const REDIRECT_TIMEOUT = 10; // seconds
 
 const CompletionStep = ({ coreValues, userInfo }: CompletionStepProps) => {
@@ -63,7 +63,7 @@ const CompletionStep = ({ coreValues, userInfo }: CompletionStepProps) => {
   };
 
   const handleRedirect = () => {
-    // window.location.href = REDIRECT_URL; TODO: REMOVE THIS
+    window.location.href = REDIRECT_URL;
   };
 
   useEffect(() => {
