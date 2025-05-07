@@ -59,7 +59,13 @@ const AuthPage = () => {
         <Card className="w-full max-w-md">
           <CardHeader className="text-center">
             <div className="mb-4 flex justify-center">
-              <Logo />
+              <Link href="/">
+                <img
+                  src="/logo-extended.webp"
+                  alt="Survey Connect Logo"
+                  className="h-[29px] w-48"
+                />
+              </Link>
             </div>
             <CardTitle className="text-2xl font-bold">Admin Login</CardTitle>
             <CardDescription>
